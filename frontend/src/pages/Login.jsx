@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserData } from "../context/UserContext";
 import { LoadingAnimation } from "../components/Loading";
 import { PinData } from "../context/PinContext";
-import picnest from "../assets/picnest.jpg";
+import picnest from "../assets/picnest2.jpg";
 
 const Login = () => {
   const [email, setEmail] = useState("");
