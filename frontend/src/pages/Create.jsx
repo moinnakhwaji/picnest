@@ -5,16 +5,17 @@ import { useNavigate } from "react-router-dom";
 
 const Create = () => {
   const inputRef = useRef(null);
-
-  const handleClick = () => {
-    inputRef.current.click();
-  };
-
   const [file, setFile] = useState("");
   const [filePrev, setFilePrev] = useState("");
   const [title, setTitle] = useState("");
   const [pin, setPin] = useState("");
+  const [loading, setLoading] = useState(false); // Loading state added
   const { addPin } = PinData();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    inputRef.current.click();
+  };
 
   const changeFileHandler = (e) => {
     const file = e.target.files[0];
@@ -28,18 +29,18 @@ const Create = () => {
     };
   };
 
-  const navigate = useNavigate();
-
   const addPinHandler = (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading state to true when form is submitted
 
     const formData = new FormData();
-
     formData.append("title", title);
     formData.append("pin", pin);
     formData.append("file", file);
 
-    addPin(formData, setFilePrev, setFile, setTitle, setPin, navigate);
+    addPin(formData, setFilePrev, setFile, setTitle, setPin, navigate).finally(() => {
+      setLoading(false); // Set loading state back to false after operation
+    });
   };
 
   return (
@@ -127,9 +128,14 @@ const Create = () => {
               </div>
               <button
                 type="submit"
-                className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700"
+                className={`w-full py-2 px-4 rounded-lg text-white ${
+                  loading
+                    ? "bg-purple-400 cursor-not-allowed"
+                    : "bg-purple-600 hover:bg-purple-700"
+                }`}
+                disabled={loading} // Disable button when loading
               >
-                Add +
+                {loading ? "Adding..." : "Add +"}
               </button>
             </form>
           </div>
