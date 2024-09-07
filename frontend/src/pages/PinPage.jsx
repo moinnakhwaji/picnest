@@ -62,13 +62,14 @@ const PinPage = ({ user }) => {
       ) : (
         pin && (
           <div className="bg-zinc-800 rounded-lg shadow-lg flex flex-col md:flex-row w-full max-w-4xl">
-            <div className="w-full md:w-1/2 bg-zinc-700 rounded-t-lg md:rounded-l-lg md:rounded-t-none flex items-center justify-center">
+            <div className="w-full md:w-1/2 bg-zinc-950 rounded-t-lg md:rounded-l-lg md:rounded-t-none flex items-center justify-center">
               {pin.image && (
-                <img
-                  src={pin.image.url}
-                  alt={pin.title}
-                  className="object-cover w-full h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none"
-                />
+          <img
+          src={pin.image.url}
+          alt={pin.title}
+          className="object-contain w-full h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none"
+        />
+        
               )}
             </div>
 
